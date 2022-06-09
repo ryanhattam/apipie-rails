@@ -93,6 +93,29 @@
             </tbody>
           </table>
         <% end %>
+
+        <% unless method[:returns].blank? %>
+          <h2><%= (t('apipie.returns')) %></h2>
+          <% method[:returns].each do |item| %>
+            <h3><%= "#{t('apipie.code')}: #{item[:code]}" %></h3>
+            <% if item[:description] %>
+              <h4><%= "#{t('apipie.description')}:" %></h4>
+              <p><%= item[:description] %></p>
+            <% end %>
+            <table class='table'>
+              <thead>
+              <tr>
+                <th><%= t('apipie.param_name') %></th>
+                <th><%= t('apipie.description') %></th>
+              </tr>
+              </thead>
+              <tbody>
+              <%= render(:partial => "params", :locals => {:params => item[:returns_object]}) %>
+              </tbody>
+            </table>
+          <% end %>
+        <% end %>
+
       </div>
     <% end %>
   </div>
